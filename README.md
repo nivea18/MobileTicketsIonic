@@ -1,6 +1,10 @@
 # 🏥 Sistema de Controle de Atendimento - Fila Médica
 
-Este projeto foi desenvolvido como parte da disciplina de Programação Mobile. O objetivo é gerenciar o fluxo de atendimento em laboratórios médicos, organizando a emissão e a chamada de senhas por prioridade.
+Este projeto foi desenvolvido como parte da disciplina de Desenvolvimento para Dispositivos Móveis. O objetivo é gerenciar o fluxo de atendimento em laboratórios médicos, organizando a emissão e a chamada de senhas por prioridade.
+
+![Ionic](https://img.shields.io/badge/Ionic-3880FF?style=for-the-badge&logo=ionic&logoColor=white)
+![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
 
 ## 📱 Sobre o Projeto
 O sistema simula um ecossistema de atendimento com três agentes principais:
@@ -14,7 +18,7 @@ O sistema simula um ecossistema de atendimento com três agentes principais:
 * **Linguagem:** TypeScript
 * **Design:** Ionicons e CSS3 customizado
 
-## 📸 Demonstração do App (Telas)
+## 📸 Demonstração do App 
 
 | Cliente (Totem) | Atendente (Painel) | Relatórios |
 | :---: | :---: | :---: |

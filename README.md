@@ -1,23 +1,33 @@
-# MobileTicketsIonic 🎫
+# 🏥 Sistema de Controle de Atendimento - Fila Médica
 
-Projeto de aplicativo mobile desenvolvido com **Ionic Framework** e **Angular** para a disciplina de Análise e Desenvolvimento de Sistemas. O foco do projeto é a gestão e visualização de ingressos.
+Este projeto foi desenvolvido como parte da disciplina de Programação Mobile. O objetivo é gerenciar o fluxo de atendimento em laboratórios médicos, organizando a emissão e a chamada de senhas por prioridade.
+
+## 📱 Sobre o Projeto
+O sistema simula um ecossistema de atendimento com três agentes principais:
+1. **Agente Cliente (AC):** Emite senhas de acordo com sua necessidade (Geral, Prioritária ou Exame).
+2. **Agente Atendente (AA):** Gerencia a chamada das senhas obedecendo às regras de prioridade.
+3. **Agente Sistema (AS):** Processa os dados e gera relatórios de desempenho e volumetria.
 
 ## 🚀 Tecnologias Utilizadas
+* **Framework:** [Ionic](https://ionicframework.com/) (v7+)
+* **Lógica:** [Angular](https://angular.io/) (Standalone Components)
+* **Linguagem:** TypeScript
+* **Design:** Ionicons e CSS3 customizado
 
-* [Ionic Framework](https://ionicframework.com/) - Interface e componentes mobile.
-* [Angular](https://angular.io/) - Lógica e estrutura do projeto.
-* [Capacitor](https://capacitorjs.com/) - Integração nativa.
-* [TypeScript](https://www.typescriptlang.org/) - Linguagem principal.
+## 📸 Demonstração do App (Telas)
 
-## 📸 Demonstração das Telas
+| Cliente (Totem) | Atendente (Painel) | Relatórios |
+| :---: | :---: | :---: |
+| ![Tela Cliente](images\cliente.png) | ![Tela Atendente](images\atendente.png) | ![Tela Relatório](images\relatórios.png) |
 
-> **EM DESENVOLVIMENTO:** As capturas de tela das Listas 3 e 4 serão adicionadas em breve, conforme o progresso do projeto.
 
-## 🛠️ Como executar o projeto
+## ⚙️ Regras de Negócio Implementadas
+* **Formato da Senha:** Segue o padrão `YYMMDD-PPSQ` (ex: 260326-SP01).
+* **Priorização:** O sistema alterna as chamadas seguindo o fluxo `[SP] -> [SE|SG] -> [SP] -> [SE|SG]`.
+* **Painel de Histórico:** Exibição das últimas 5 senhas chamadas em tempo real.
+* **Relatórios:** Contagem automatizada de senhas emitidas e atendidas separadas por categoria.
 
-1. Clone o repositório:
-   `git clone https://github.com/nivea18/MobileTicketsIonic.git`
-2. Instale as dependências:
-   `npm install`
-3. Rode o projeto:
-   `ionic serve`
+## 🛠️ Como rodar o projeto
+1. Instale as dependências:
+   ```bash
+   npm install

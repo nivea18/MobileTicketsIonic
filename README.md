@@ -18,7 +18,7 @@ O sistema simula um ecossistema de atendimento com três agentes principais:
 
 | Cliente (Totem) | Atendente (Painel) | Relatórios |
 | :---: | :---: | :---: |
-| ![Tela Cliente](images\cliente.png) | ![Tela Atendente](images\atendente.png) | ![Tela Relatório](images\relatórios.png) |
+| ![Tela Cliente](./images/cliente.png) | ![Tela Atendente](./images/atendente.png) | ![Tela Relatório](./images/relatórios.png) |
 
 
 ## ⚙️ Regras de Negócio Implementadas

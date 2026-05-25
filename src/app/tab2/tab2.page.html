@@ -4,25 +4,56 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card class="ion-text-center">
+<ion-content class="ion-padding">
+  <ion-card class="painel">
     <ion-card-header>
-      <ion-card-title>SENHA ATUAL</ion-card-title>
+      <ion-card-title>Senha atual</ion-card-title>
+      <ion-card-subtitle>{{ senhasService.mensagem }}</ion-card-subtitle>
     </ion-card-header>
+
     <ion-card-content>
-      <h1 style="font-size: 3em; color: var(--ion-color-success);">
-        {{ senhasService.senhaAtual || '---' }}
-      </h1>
-      <ion-button expand="block" (click)="senhasService.proximaSenha()">
-        CHAMAR PRÓXIMO
+      <ion-badge [color]="senhasService.expedienteAberto ? 'success' : 'medium'">
+        {{ senhasService.expedienteAberto ? 'Expediente aberto' : 'Expediente encerrado' }}
+      </ion-badge>
+
+      <h1>{{ senhasService.senhaAtual?.codigo || '---' }}</h1>
+      <p *ngIf="senhasService.senhaAtual">
+        Guiche {{ senhasService.senhaAtual.guiche }} -
+        TM {{ senhasService.senhaAtual.tempoAtendimento }} min
+      </p>
+
+      <ion-button expand="block" (click)="senhasService.proximaSenha(1)">
+        Chamar proximo
+      </ion-button>
+      <ion-button
+        *ngIf="senhasService.expedienteAberto"
+        expand="block"
+        fill="outline"
+        color="medium"
+        (click)="senhasService.encerrarExpediente()"
+      >
+        Encerrar expediente
+      </ion-button>
+      <ion-button
+        *ngIf="!senhasService.expedienteAberto"
+        expand="block"
+        fill="clear"
+        color="success"
+        (click)="senhasService.iniciarExpediente()"
+      >
+        Iniciar expediente
       </ion-button>
     </ion-card-content>
   </ion-card>
 
   <ion-list>
-    <ion-list-header>Últimas 5 Chamadas</ion-list-header>
-    <ion-item *ngFor="let s of senhasService.ultimasChamadas">
-      <ion-label>{{ s }}</ion-label>
+    <ion-list-header>Ultimas 5 chamadas</ion-list-header>
+    <ion-item *ngFor="let senha of senhasService.ultimasChamadas">
+      <ion-label>
+        <h2>{{ senha.codigo }}</h2>
+        <p>{{ senhasService.rotulos[senha.tipo] }} - Guiche {{ senha.guiche }}</p>
+      </ion-label>
+      <ion-note slot="end">{{ senha.tempoAtendimento }} min</ion-note>
     </ion-item>
   </ion-list>
 </ion-content>

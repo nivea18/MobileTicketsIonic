@@ -4,23 +4,44 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <ion-card>
     <ion-card-header>
-      <ion-item lines="none">
-        <ion-label slot="start">Senha:</ion-label>
-        <ion-text color="dark">
-          <h2 style="font-weight: bold; font-size: 22px;">
-            {{ senhasService.inputNovaSenha }}
-          </h2>
-        </ion-text>
-      </ion-item>
+      <ion-card-title>Totem de senhas</ion-card-title>
+      <ion-card-subtitle>{{ senhasService.mensagem }}</ion-card-subtitle>
     </ion-card-header>
 
     <ion-card-content>
-      <ion-button expand="block" (click)="senhasService.novaSenha('SG')">Senha Geral</ion-button>
-      <ion-button expand="block" (click)="senhasService.novaSenha('SP')">Senha Prioritária</ion-button>
-      <ion-button expand="block" (click)="senhasService.novaSenha('SE')">Senha Exame</ion-button>
+      <div class="senha-gerada">
+        <ion-label>Ultima senha emitida</ion-label>
+        <strong>{{ senhasService.inputNovaSenha || '---' }}</strong>
+      </div>
+
+      <ion-button expand="block" color="danger" (click)="senhasService.novaSenha('SP')">
+        Senha Prioritaria
+      </ion-button>
+      <ion-button expand="block" color="primary" (click)="senhasService.novaSenha('SG')">
+        Senha Geral
+      </ion-button>
+      <ion-button expand="block" color="success" (click)="senhasService.novaSenha('SE')">
+        Retirada de Exames
+      </ion-button>
     </ion-card-content>
   </ion-card>
+
+  <ion-list>
+    <ion-list-header>Senhas aguardando</ion-list-header>
+    <ion-item>
+      <ion-label>Prioritaria (SP)</ion-label>
+      <ion-badge color="danger">{{ senhasService.senhasArray.SP.length }}</ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-label>Geral (SG)</ion-label>
+      <ion-badge color="primary">{{ senhasService.senhasArray.SG.length }}</ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-label>Exames (SE)</ion-label>
+      <ion-badge color="success">{{ senhasService.senhasArray.SE.length }}</ion-badge>
+    </ion-item>
+  </ion-list>
 </ion-content>

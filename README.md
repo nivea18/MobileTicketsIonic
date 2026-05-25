@@ -1,37 +1,51 @@
-# 🏥 Sistema de Controle de Atendimento - Fila Médica
+# MobileTicketsIonic
 
-Este projeto foi desenvolvido como parte da disciplina de Desenvolvimento para Dispositivos Móveis. O objetivo é gerenciar o fluxo de atendimento em laboratórios médicos, organizando a emissão e a chamada de senhas por prioridade.
+Sistema Ionic/Angular para controle de atendimento em filas de laboratorios medicos. O projeto evolui a Fase 1 e implementa as regras descritas no documento "Sistema para controle de atendimento".
 
-![Ionic](https://img.shields.io/badge/Ionic-3880FF?style=for-the-badge&logo=ionic&logoColor=white)
-![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white)
-![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+## Tecnologias
 
-## 📱 Sobre o Projeto
-O sistema simula um ecossistema de atendimento com três agentes principais:
-1. **Agente Cliente (AC):** Emite senhas de acordo com sua necessidade (Geral, Prioritária ou Exame).
-2. **Agente Atendente (AA):** Gerencia a chamada das senhas obedecendo às regras de prioridade.
-3. **Agente Sistema (AS):** Processa os dados e gera relatórios de desempenho e volumetria.
+- Ionic
+- Angular com NgModules
+- TypeScript
+- Capacitor
 
-## 🚀 Tecnologias Utilizadas
-* **Framework:** [Ionic](https://ionicframework.com/) (v7+)
-* **Lógica:** [Angular](https://angular.io/) (Standalone Components)
-* **Linguagem:** TypeScript
-* **Design:** Ionicons e CSS3 customizado
+## Agentes do sistema
 
-## 📸 Demonstração do App 
+- AC - Agente Cliente: emite senhas no totem.
+- AA - Agente Atendente: chama a proxima senha disponivel para atendimento.
+- AS - Agente Sistema: controla filas, prioridades, descarte, historico e relatorios.
 
-| Cliente (Totem) | Atendente (Painel) | Relatórios |
+## Regras implementadas
+
+- Tres tipos de senha: `SP` para Prioritaria, `SG` para Geral e `SE` para Retirada de Exames.
+- Numeracao no formato `YYMMDD-PPSQ`, com sequencia reiniciada por dia e por tipo.
+- Chamada alternada conforme a regra `[SP] -> [SE|SG] -> [SP] -> [SE|SG]`.
+- Senhas `SE` sao chamadas antes das `SG` apos uma senha prioritaria, por terem atendimento rapido.
+- Expediente tratado das 07:00 as 17:00; ao encerrar, senhas restantes sao descartadas.
+- 5% das senhas chamadas podem ser descartadas por ausencia do cliente.
+- Painel de atendimento exibe apenas a senha atual e as 5 ultimas senhas chamadas.
+- Relatorios com totais emitidos, atendidos, descartados, quantitativos por prioridade e relatorio detalhado.
+- Tempo medio simulado por tipo: `SP` entre 10 e 20 min, `SG` entre 2 e 8 min e `SE` com 1 min em 95% dos atendimentos ou 5 min em 5%.
+
+## Telas
+
+| Cliente | Atendente | Relatorios |
 | :---: | :---: | :---: |
-| ![Tela Cliente](./images/cliente.png) | ![Tela Atendente](./images/atendente.png) | ![Tela Relatório](./images/relatórios.png) |
+| ![Tela Cliente](./images/cliente.png) | ![Tela Atendente](./images/atendente.png) | ![Tela Relatorios](./images/relatórios.png) |
 
+## Como rodar
 
-## ⚙️ Regras de Negócio Implementadas
-* **Formato da Senha:** Segue o padrão `YYMMDD-PPSQ` (ex: 260326-SP01).
-* **Priorização:** O sistema alterna as chamadas seguindo o fluxo `[SP] -> [SE|SG] -> [SP] -> [SE|SG]`.
-* **Painel de Histórico:** Exibição das últimas 5 senhas chamadas em tempo real.
-* **Relatórios:** Contagem automatizada de senhas emitidas e atendidas separadas por categoria.
+```bash
+npm install
+npm start
+```
 
-## 🛠️ Como rodar o projeto
-1. Instale as dependências:
-   ```bash
-   npm install
+Depois acesse o endereco exibido pelo Angular no navegador.
+
+## Estrutura principal
+
+- `src/app/services/senhas.service.ts`: regras de negocio, filas, codigos, chamadas, descartes e relatorios.
+- `src/app/tab1`: totem do cliente.
+- `src/app/tab2`: painel do atendente.
+- `src/app/tab3`: relatorios.
+- `src/app/app.module.ts`: configuracao Angular com NgModules.

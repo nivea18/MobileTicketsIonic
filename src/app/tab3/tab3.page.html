@@ -1,31 +1,68 @@
 <ion-header>
   <ion-toolbar color="tertiary">
-    <ion-title>Relatórios</ion-title>
+    <ion-title>Relatorios</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content class="ion-padding">
   <ion-grid>
     <ion-row>
-      <ion-col size="6">
+      <ion-col size="4">
         <ion-card color="light">
           <ion-card-header>Emitidas</ion-card-header>
           <ion-card-content><h2>{{ senhasService.totalEmitidas }}</h2></ion-card-content>
         </ion-card>
       </ion-col>
-      <ion-col size="6">
+      <ion-col size="4">
         <ion-card color="light">
           <ion-card-header>Atendidas</ion-card-header>
           <ion-card-content><h2>{{ senhasService.totalAtendidas }}</h2></ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col size="4">
+        <ion-card color="light">
+          <ion-card-header>Descartadas</ion-card-header>
+          <ion-card-content><h2>{{ senhasService.totalDescartadas }}</h2></ion-card-content>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
 
   <ion-card>
-    <ion-card-header>Status das Filas (Aguardando)</ion-card-header>
-    <ion-item>Geral (SG): {{ senhasService.senhasArray.SG.length }}</ion-item>
-    <ion-item>Prioritária (SP): {{ senhasService.senhasArray.SP.length }}</ion-item>
-    <ion-item>Exame (SE): {{ senhasService.senhasArray.SE.length }}</ion-item>
+    <ion-card-header>
+      <ion-card-title>Resumo por prioridade</ion-card-title>
+    </ion-card-header>
+
+    <ion-list>
+      <ion-item *ngFor="let tipo of senhasService.tipos">
+        <ion-label>
+          <h2>{{ tipo }} - {{ senhasService.rotulos[tipo] }}</h2>
+          <p>
+            Emitidas: {{ senhasService.totalEmitidasPorTipo(tipo) }} |
+            Atendidas: {{ senhasService.totalAtendidasPorTipo(tipo) }} |
+            TM: {{ senhasService.tempoMedioPorTipo(tipo) }}
+          </p>
+        </ion-label>
+        <ion-badge slot="end">{{ senhasService.senhasArray[tipo].length }}</ion-badge>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Relatorio detalhado</ion-card-title>
+      <ion-card-subtitle>Dados diarios e mensais simulados no app</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-list>
+      <ion-item *ngFor="let senha of senhasService.relatorioDetalhado">
+        <ion-label>
+          <h2>{{ senha.codigo }} - {{ senha.status }}</h2>
+          <p>Tipo: {{ senha.tipo }} | Emissao: {{ senhasService.formatarData(senha.emitidaEm) }}</p>
+          <p>Atendimento: {{ senhasService.formatarData(senha.atendidaEm) }} | Guiche: {{ senha.guiche || '-' }}</p>
+        </ion-label>
+        <ion-note slot="end">{{ senha.tempoAtendimento || '-' }} min</ion-note>
+      </ion-item>
+    </ion-list>
   </ion-card>
 </ion-content>

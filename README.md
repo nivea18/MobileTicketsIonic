@@ -31,7 +31,7 @@ Sistema Ionic/Angular para controle de atendimento em filas de laboratorios medi
 
 | Cliente | Atendente | Relatorios |
 | :---: | :---: | :---: |
-| ![Tela Cliente](cliente.png) | ![Tela Atendente](atendente.png) | ![Tela Relatorios](relatorios.png) |
+| ![Tela Cliente](./cliente.png) | ![Tela Atendente](./atendente.png) | ![Tela Relatorios](./relatorios.png) |
 
 ## Como rodar
 
